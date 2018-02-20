@@ -1,18 +1,32 @@
 import java.io.*;
-import java.util.Scanner;
 
 public class ProductTest {
-    public static void main(String[] args) throws FileNotFoundException {
+    public static void main(String[] args) throws IOException {
 
+        FileReader fileReader = new FileReader("products.csv");
+        BufferedReader bfr = new BufferedReader(fileReader);
+        String line = null;
 
-        File file = new File("products.csv");
-        Scanner scan = new Scanner(new File ("products.csv"));
+        Product[] tablica = new Product[3];
 
-        String tekst ="";
-        while (scan.hasNextLine()) {
-            Product[] array = new Product[3];
-            array[0] = new Product(scan.nextLine(), scan.nextLine(), scan.nextInt());
-            System.out.println(array[0].getNazwa()+" "+array[0].getProducent()+" "+array[0].getCena());
+        while ((line = bfr.readLine()) != null) {
+            String[] daneProduktu = line.split(";");
+                Product prod = new Product(daneProduktu[0], daneProduktu[1], Integer.valueOf(daneProduktu[2]));
+                System.out.println(prod.getNazwa() + " " + prod.getProducent() + " " + prod.getCena());
+                for (int i = 0; i <= 2; i++) {
+                    tablica[i] = new Product(prod.getNazwa(), prod.getProducent(), prod.getCena());
+                }
+        }
+        bfr.close();
+        System.out.println(tablica[0].toString());
+        System.out.println(tablica[1].toString());
+        System.out.println(tablica[2].toString());
+
+        int sum = 0;
+        for (int i = 0; i <= 2; i++) {
+            sum = sum + tablica[i].calculateSum();
         }
     }
 }
+
+
