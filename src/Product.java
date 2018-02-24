@@ -30,17 +30,6 @@ public class Product {
     }
 
     public int calculateSum(){
-        int sum =0;
-        sum = sum+cena;
-        return sum;
-    }
-
-    @Override
-    public String toString() {
-        return "Product{" +
-                "nazwa='" + nazwa + '\'' +
-                ", producent='" + producent + '\'' +
-                ", cena=" + cena +
-                '}';
-    }
+            return getCena();
+        }
 }
